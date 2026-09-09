@@ -1,4 +1,4 @@
-# UniThink
+# StudyVize
 
 Study-abroad consultancy platform. Three components across three repos: a **public marketing website** that generates leads, a **corporate admin portal** where consultants manage those leads through the full student-application lifecycle, and a **backend API** that ties them together and handles email notifications.
 
@@ -13,7 +13,7 @@ Built as client work — this is a real product used by consultancy staff.
                                       │      Public Marketing         │
                                       │      (static HTML/CSS/JS)     │
                                       │  Landing pages, contact form  │
-                                      │      unithink-website         │
+                                      │      studyvize-website         │
                                       └──────────────┬───────────────┘
                                                      │
                                              submit contact form
@@ -25,7 +25,7 @@ Built as client work — this is a real product used by consultancy staff.
                                       │  - Application CRUD           │
                                       │  - Email notifications        │
                                       │    (nodemailer)               │
-                                      │      unithink-corp-api        │
+                                      │      studyvize-api        │
                                       └──────┬──────────────────┬────┘
                                              │                  │
                                              ▼                  ▼
@@ -46,7 +46,7 @@ Built as client work — this is a real product used by consultancy staff.
                                       │  - University applications    │
                                       │  - Document checklists        │
                                       │  - Status tracking            │
-                                      │      unithink-corp-web        │
+                                      │      studyvize-portal        │
                                       └──────────────────────────────┘
 ```
 
@@ -54,16 +54,16 @@ Built as client work — this is a real product used by consultancy staff.
 
 | Repo | Purpose | Tech |
 |---|---|---|
-| [**`unithink-website`**](https://github.com/Dev-Harsh0218/unithink-website) | Public marketing website — course listings, program pages, contact form for prospective students | HTML5, CSS3, vanilla JavaScript |
-| [**`unithink-corp-web`**](https://github.com/Dev-Harsh0218/unithink-corp-web) | Staff-facing admin portal — consultants manage leads, applications, documents, status | Next.js 16, TypeScript, React 19, Tailwind, lucide-react |
-| [**`unithink-corp-api`**](https://github.com/Dev-Harsh0218/unithink-corp-api) | REST API + email pipeline — receives leads from website, serves the admin portal, sends notification emails | Node.js, Express, MongoDB, Mongoose, Nodemailer, deployed on Vercel |
+| [**`studyvize-website`**](https://github.com/Dev-Harsh0218/studyvize-website) | Public marketing website — course listings, program pages, contact form for prospective students | HTML5, CSS3, vanilla JavaScript |
+| [**`studyvize-portal`**](https://github.com/Dev-Harsh0218/studyvize-portal) | Staff-facing admin portal — consultants manage leads, applications, documents, status | Next.js 16, TypeScript, React 19, Tailwind, lucide-react |
+| [**`studyvize-api`**](https://github.com/Dev-Harsh0218/studyvize-api) | REST API + email pipeline — receives leads from website, serves the admin portal, sends notification emails | Node.js, Express, MongoDB, Mongoose, Nodemailer, deployed on Vercel |
 
 ## The flow
 
-1. **Prospective student** visits [unithink-website](https://github.com/Dev-Harsh0218/unithink-website), browses programs, fills out a contact form
-2. **Website** POSTs the lead to `unithink-corp-api` — API creates a `Lead` document in MongoDB, fires an acknowledgement email to the student + notification email to the assigned consultant (via Nodemailer)
-3. **Consultant** signs in to [unithink-corp-web](https://github.com/Dev-Harsh0218/unithink-corp-web), sees the new lead in their inbox, opens the student profile, starts building the university application
-4. **All application state** — student personal info, document uploads, university choices, application status — lives in MongoDB, updated via `unithink-corp-api` from the portal
+1. **Prospective student** visits [studyvize-website](https://github.com/Dev-Harsh0218/studyvize-website), browses programs, fills out a contact form
+2. **Website** POSTs the lead to `studyvize-api` — API creates a `Lead` document in MongoDB, fires an acknowledgement email to the student + notification email to the assigned consultant (via Nodemailer)
+3. **Consultant** signs in to [studyvize-portal](https://github.com/Dev-Harsh0218/studyvize-portal), sees the new lead in their inbox, opens the student profile, starts building the university application
+4. **All application state** — student personal info, document uploads, university choices, application status — lives in MongoDB, updated via `studyvize-api` from the portal
 5. **Email pipeline** fires on state transitions (application submitted, docs approved, offer received, visa granted) — Nodemailer handles delivery
 
 ## Design decisions
